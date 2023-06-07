@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_project/ui/screens/profile.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -42,7 +43,13 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                 focusColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Profile(),
+                      ));
+                },
                 icon: const Icon(Icons.person),
               ),
             ),
