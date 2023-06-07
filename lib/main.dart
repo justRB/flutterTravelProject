@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_project/ui/screens/welcome.dart';
 
-void main() {
+Future<void> main() async {
+  await initialization(null);
+
   runApp(const MyApp());
+}
+
+Future initialization(BuildContext? context) async {
+  await Future.delayed(const Duration(seconds: 3));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,6 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Welcome(),
     );
   }
