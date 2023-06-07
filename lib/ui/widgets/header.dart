@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
-  const Header({super.key});
+  final String title;
+
+  const Header({
+    required this.title,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +22,10 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
               width: 50,
               height: 50,
             ),
-            const Text(
-              'Découvrez nos villes de France',
-              style: TextStyle(
-                fontSize: 14,
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 15,
                 fontWeight: FontWeight.w500,
               ),
             ),
