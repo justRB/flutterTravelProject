@@ -7,6 +7,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
+        margin: const EdgeInsets.only(left: 5, right: 5),
         color: Colors.transparent,
         height: 100,
         child: Row(
@@ -24,6 +25,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
             Container(
+              margin: const EdgeInsets.only(left: 5, right: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(32),
@@ -31,6 +33,10 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
               width: 50,
               height: 50,
               child: IconButton(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 onPressed: () {},
                 icon: const Icon(Icons.person),
               ),
