@@ -26,6 +26,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
             Text(
               title,
               style: const TextStyle(
+                color: Colors.white,
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
               ),
