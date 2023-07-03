@@ -20,6 +20,7 @@ class Profile extends StatelessWidget {
                 icon: const Icon(Icons.settings),
                 onPressed: () {}),
             const SwitchThemeMode(),
+            const Text("Vos lieux visités")
           ],
         ),
       ),
@@ -41,9 +42,9 @@ class _SwitchThemeModeState extends State<SwitchThemeMode> {
       MaterialStateProperty.resolveWith<Icon?>(
     (Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
-        return const Icon(Icons.check);
+        return const Icon(Icons.light_mode);
       }
-      return const Icon(Icons.close);
+      return const Icon(Icons.dark_mode);
     },
   );
 
