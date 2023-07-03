@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../models/city_class.dart';
+
 class CityCard extends StatelessWidget {
   final String city;
   final double borderRadius;
@@ -14,6 +16,7 @@ class CityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CityClass cityObject = CityClass(name: city, score: score);
     return GestureDetector(
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
@@ -45,7 +48,7 @@ class CityCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, '/city');
+        Navigator.pushNamed(context, '/city', arguments: cityObject);
       },
     );
   }

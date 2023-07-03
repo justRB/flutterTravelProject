@@ -12,6 +12,7 @@ class Welcome extends StatefulWidget {
 
 class _WelcomeState extends State<Welcome> {
   List<String> cities = ["Angers", "Tours", "Paris", "Lyon", "Bordeaux"];
+  List<double> scores = [4.3, 3.8, 2.9, 1.3, 3.3];
   List<String> filteredCities = [];
 
   @override
@@ -59,7 +60,7 @@ class _WelcomeState extends State<Welcome> {
                     return CityCard(
                       city: filteredCities[index].toString(),
                       borderRadius: 16,
-                      score: 4.5,
+                      score: scores[index],
                     );
                   },
                 ),
