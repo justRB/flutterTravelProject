@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_travel_project/ui/widgets/city_card.dart';
 import 'package:flutter_travel_project/ui/widgets/header.dart';
 import 'package:flutter_travel_project/ui/widgets/research_bar.dart';
@@ -12,6 +11,23 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  List<String> cities = ["Angers", "Tours", "Paris", "Lyon", "Bordeaux"];
+  List<String> filteredCities = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredCities = cities;
+  }
+
+  void filterCities(String query) {
+    setState(() {
+      filteredCities = cities
+          .where((city) => city.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +36,8 @@ class _WelcomeState extends State<Welcome> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const ResearchBar(
+            ResearchBar(
+              filter: filterCities,
               placeholder: 'Rechercher une ville...',
               percent: 0.8,
               height: 20.0,
@@ -33,10 +50,10 @@ class _WelcomeState extends State<Welcome> {
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
-                  itemCount: 10,
+                  itemCount: filteredCities.length,
                   itemBuilder: (context, index) {
-                    return const CityCard(
-                      city: 'Angers',
+                    return CityCard(
+                      city: filteredCities[index].toString(),
                       borderRadius: 16,
                       score: 4.5,
                     );
