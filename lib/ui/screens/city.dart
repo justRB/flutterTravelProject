@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/header.dart';
 
 class City extends StatefulWidget {
@@ -15,6 +16,7 @@ class _CityState extends State<City> {
       appBar: Header(
         title: "Explorer les avis",
         showProfile: true,
+        showReturn: true,
       ),
     );
   }

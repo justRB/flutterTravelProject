@@ -34,6 +34,7 @@ class _WelcomeState extends State<Welcome> {
       appBar: const Header(
         title: 'Découvrez nos villes de France',
         showProfile: true,
+        showReturn: false,
       ),
       body: Center(
         child: Column(

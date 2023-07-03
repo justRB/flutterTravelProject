@@ -11,6 +11,7 @@ class Profile extends StatelessWidget {
       appBar: const Header(
         title: "Profil utilisateur",
         showProfile: false,
+        showReturn: true,
       ),
       body: Center(
         child: Column(

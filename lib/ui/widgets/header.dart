@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class Header extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showProfile;
+  final bool showReturn;
 
   const Header({
     required this.title,
     required this.showProfile,
+    required this.showReturn,
     super.key,
   });
 
@@ -20,10 +22,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const SizedBox(
-              width: 50,
-              height: 50,
-            ),
+            showReturnButton(context),
             Text(
               title,
               style: const TextStyle(
@@ -58,6 +57,35 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
             Navigator.pushNamed(context, '/profile');
           },
           icon: const Icon(Icons.person),
+        ),
+      );
+    } else {
+      return const SizedBox(
+        width: 50,
+        height: 50,
+      );
+    }
+  }
+
+  Widget showReturnButton(context) {
+    if (showReturn) {
+      return Container(
+        margin: const EdgeInsets.only(left: 5, right: 5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(32),
+        ),
+        width: 50,
+        height: 50,
+        child: IconButton(
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: () {
+            Navigator.maybePop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
         ),
       );
     } else {
