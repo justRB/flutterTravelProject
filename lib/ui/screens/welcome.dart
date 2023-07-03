@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_travel_project/ui/widgets/city_card.dart';
 import 'package:flutter_travel_project/ui/widgets/header.dart';
 import 'package:flutter_travel_project/ui/widgets/research_bar.dart';
@@ -18,19 +19,30 @@ class _WelcomeState extends State<Welcome> {
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            ResearchBar(
+          children: [
+            const ResearchBar(
               placeholder: 'Rechercher une ville...',
               percent: 0.8,
               height: 20.0,
               textSize: 14,
               borderRadius: 16,
             ),
-            CityCard(
-              city: 'Angers',
-              percent: 0.8,
-              borderRadius: 16,
-              score: 4.5,
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.only(top: 25, bottom: 25),
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return const CityCard(
+                      city: 'Angers',
+                      borderRadius: 16,
+                      score: 4.5,
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),

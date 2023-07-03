@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 
 class CityCard extends StatelessWidget {
   final String city;
-  final double percent;
   final double borderRadius;
   final double score;
 
   const CityCard({
     required this.city,
-    required this.percent,
     required this.borderRadius,
     required this.score,
     super.key,
@@ -17,8 +15,7 @@ class CityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 15),
-      width: MediaQuery.of(context).size.width * percent,
+      margin: const EdgeInsets.only(bottom: 10),
       height: 100,
       decoration: BoxDecoration(
         color: Colors.white,
