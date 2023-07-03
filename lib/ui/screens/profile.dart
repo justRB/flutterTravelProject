@@ -20,12 +20,59 @@ class Profile extends StatelessWidget {
                 label: const Text("Informations"),
                 backgroundColor: const Color.fromARGB(255, 90, 170, 149),
                 icon: const Icon(Icons.info),
-                onPressed: () {}),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return InfoPopup(
+                        nom: 'Nom',
+                        prenom: 'Prenom',
+                        dateAnniversaire: 'Date',
+                      );
+                    },
+                  );
+                }),
             const SwitchThemeMode(),
             const Text("Vos lieux visités")
           ],
         ),
       ),
+    );
+  }
+}
+
+class InfoPopup extends StatelessWidget {
+  final String nom;
+  final String prenom;
+  final String dateAnniversaire;
+
+  InfoPopup({
+    required this.nom,
+    required this.prenom,
+    required this.dateAnniversaire,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Informations de la personne'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Nom: $nom'),
+          Text('Prénom: $prenom'),
+          Text('Date d\'anniversaire: $dateAnniversaire'),
+        ],
+      ),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Fermer'),
+        ),
+      ],
     );
   }
 }
@@ -62,4 +109,10 @@ class _SwitchThemeModeState extends State<SwitchThemeMode> {
       },
     );
   }
+}
+
+@override
+Widget build(BuildContext context) {
+  // TODO: implement build
+  throw UnimplementedError();
 }
