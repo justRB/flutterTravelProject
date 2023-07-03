@@ -15,9 +15,9 @@ class Profile extends StatelessWidget {
         child: Column(
           children: [
             FloatingActionButton.extended(
-                label: const Text("Paramètre"),
-                backgroundColor: Colors.green,
-                icon: const Icon(Icons.settings),
+                label: const Text("Informations"),
+                backgroundColor: const Color.fromARGB(255, 90, 170, 149),
+                icon: const Icon(Icons.info),
                 onPressed: () {}),
             const SwitchThemeMode(),
             const Text("Vos lieux visités")
