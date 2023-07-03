@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ResearchBar extends StatefulWidget {
+  final void Function(String) filter;
   final String placeholder;
   final double percent;
   final double height;
@@ -8,6 +9,7 @@ class ResearchBar extends StatefulWidget {
   final double borderRadius;
 
   const ResearchBar({
+    required this.filter,
     required this.placeholder,
     required this.percent,
     required this.height,
@@ -31,6 +33,9 @@ class _ResearchBarState extends State<ResearchBar> {
       ),
       width: MediaQuery.of(context).size.width * widget.percent,
       child: TextField(
+        onChanged: (value) {
+          widget.filter.call(value);
+        },
         style: TextStyle(fontSize: widget.textSize),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: widget.height),
