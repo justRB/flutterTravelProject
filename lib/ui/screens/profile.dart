@@ -10,6 +10,7 @@ class Profile extends StatelessWidget {
     return Scaffold(
       appBar: const Header(
         title: "Profil utilisateur",
+        showProfile: false,
       ),
       body: Center(
         child: Column(

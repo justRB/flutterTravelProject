@@ -14,34 +14,39 @@ class CityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      height: 100,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(borderRadius),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(
-            city,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Row(
-            children: [
-              Text(score.toString()),
-              const Icon(
-                Icons.star,
-                color: Color.fromARGB(255, 255, 209, 59),
+    return GestureDetector(
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        height: 100,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              city,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
-        ],
+            ),
+            Row(
+              children: [
+                Text(score.toString()),
+                const Icon(
+                  Icons.star,
+                  color: Color.fromARGB(255, 255, 209, 59),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
+      onTap: () {
+        Navigator.pushNamed(context, '/city');
+      },
     );
   }
 }

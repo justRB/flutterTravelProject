@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_travel_project/ui/screens/profile.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool showProfile;
 
   const Header({
     required this.title,
+    required this.showProfile,
     super.key,
   });
 
@@ -31,33 +32,40 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 5, right: 5),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(32),
-              ),
-              width: 50,
-              height: 50,
-              child: IconButton(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Profile(),
-                      ));
-                },
-                icon: const Icon(Icons.person),
-              ),
-            ),
+            showTheProfile(context),
           ],
         ),
       ),
     );
+  }
+
+  Widget showTheProfile(context) {
+    if (showProfile) {
+      return Container(
+        margin: const EdgeInsets.only(left: 5, right: 5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(32),
+        ),
+        width: 50,
+        height: 50,
+        child: IconButton(
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile');
+          },
+          icon: const Icon(Icons.person),
+        ),
+      );
+    } else {
+      return const SizedBox(
+        width: 50,
+        height: 50,
+      );
+    }
   }
 
   @override

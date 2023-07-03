@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_project/ui/screens/welcome.dart';
+import 'ui/screens/city.dart';
+import 'ui/screens/profile.dart';
 
 Future<void> main() async {
   await initialization(null);
@@ -17,6 +19,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        '/welcome': (context) => const Welcome(),
+        '/city': (context) => const City(),
+        '/profile': (context) => const Profile(),
+      },
       theme: ThemeData(
         useMaterial3: true,
         scaffoldBackgroundColor: const Color.fromARGB(255, 0, 100, 148),

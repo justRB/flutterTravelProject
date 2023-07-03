@@ -31,7 +31,10 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Header(title: 'Découvrez nos villes de France'),
+      appBar: const Header(
+        title: 'Découvrez nos villes de France',
+        showProfile: true,
+      ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
