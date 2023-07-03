@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_project/ui/widgets/city_card.dart';
 import 'package:flutter_travel_project/ui/widgets/header.dart';
 import 'package:flutter_travel_project/ui/widgets/research_bar.dart';
 
@@ -24,6 +25,12 @@ class _WelcomeState extends State<Welcome> {
               height: 20.0,
               textSize: 14,
               borderRadius: 16,
+            ),
+            CityCard(
+              city: 'Angers',
+              percent: 0.8,
+              borderRadius: 16,
+              score: 4.5,
             ),
           ],
         ),
