@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_project/ui/widgets/publication_card.dart';
-import '../widgets/header.dart';
+
 import '../../models/city_class.dart';
+import '../widgets/header.dart';
 
 class City extends StatefulWidget {
   const City({super.key});
@@ -59,7 +60,7 @@ class _CityState extends State<City> {
                         authorLastName: 'Dubois',
                         imageUrl: 'paris.jpg',
                         comment:
-                            'La Tour Eiffel de jour sur Paris est magnifique, il fait chaud avec un super soleil, en famille nous continuons notre séjour là-bas.',
+                            '123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 123456789 ',
                         date: '04/07/2023 - 13:59',
                         score: 4.3,
                       ),

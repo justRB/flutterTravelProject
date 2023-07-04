@@ -23,7 +23,7 @@ class PublicationCard extends StatefulWidget {
 }
 
 class _PublicationCardState extends State<PublicationCard> {
-  int maxLine = 8;
+  int maxLine = 3;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -86,7 +86,7 @@ class _PublicationCardState extends State<PublicationCard> {
               child: Column(
                 children: [
                   Text(
-                    "\"${widget.comment}\"",
+                    widget.comment,
                     maxLines: maxLine,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -133,7 +133,7 @@ class _PublicationCardState extends State<PublicationCard> {
       ),
       onTap: () {
         setState(() {
-          maxLine = (maxLine == 8) ? 100 : 8;
+          maxLine = (maxLine == 3) ? 10 : 3;
         });
       },
     );
