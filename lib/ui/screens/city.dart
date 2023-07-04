@@ -46,7 +46,28 @@ class _CityState extends State<City> {
                 ),
               ],
             ),
-            PublicationCard(),
+            Expanded(
+              child: PageView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return SingleChildScrollView(
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 25, right: 25),
+                      child: const PublicationCard(
+                        authorFirstname: 'Fabien',
+                        authorLastName: 'Dubois',
+                        imageUrl: 'paris.jpg',
+                        comment:
+                            'La Tour Eiffel de jour sur Paris est magnifique, il fait chaud avec un super soleil, en famille nous continuons notre séjour là-bas.',
+                        date: '04/07/2023 - 13:59',
+                        score: 4.3,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
