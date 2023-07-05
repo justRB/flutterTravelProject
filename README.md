@@ -1,16 +1,23 @@
 # flutter_travel_project
 
-A new Flutter project.
+FlutterTravel est notre projet de "carnet de voyage" réaliser au cours des 5 séances allouées à ce projet
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Version Flutter + version Dart + autres informations utiles :
+Pour réaliser cette application nous nous sommes basé sur la version 3.7.12 de Flutter ainsi que 2.19.6 de Dart
 
-A few resources to get you started if this is your first Flutter project:
+Descriptif des fonctionnalités :
+utilisateur non connectés :
+    -connexion
+    -créer un compte
+tous les utilisateurs:
+    -voir la liste des villes
+    -voir la note des villes
+    -voir les commentaires et notes des gens sur une ville
+    -filtrer les commentaires et notes
+utilisateur connecté:
+    -voir les commentaires et notes postés par l'utilisateur connecté
+    -poster des commentaires et notes sur une ville
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Descriptif des API utilisées :
