@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_project/models/publication_class.dart';
 import 'package:flutter_travel_project/ui/widgets/publication_card.dart';
+
 import '../../models/city_class.dart';
 import '../widgets/header.dart';
 
@@ -144,7 +145,9 @@ class _CityState extends State<City> {
                         ],
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/publication');
+                    },
                   ),
                 ],
               ),

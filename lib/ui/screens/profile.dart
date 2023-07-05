@@ -28,7 +28,6 @@ class Profile extends StatelessWidget {
                       return InfoPopup(
                         nom: 'Nom',
                         prenom: 'Prenom',
-                        dateAnniversaire: 'Date',
                       );
                     },
                   );
@@ -45,12 +44,10 @@ class Profile extends StatelessWidget {
 class InfoPopup extends StatelessWidget {
   final String nom;
   final String prenom;
-  final String dateAnniversaire;
 
   InfoPopup({
     required this.nom,
     required this.prenom,
-    required this.dateAnniversaire,
   });
 
   @override
@@ -63,7 +60,6 @@ class InfoPopup extends StatelessWidget {
         children: <Widget>[
           Text('Nom: $nom'),
           Text('Prénom: $prenom'),
-          Text('Date d\'anniversaire: $dateAnniversaire'),
         ],
       ),
       actions: <Widget>[
