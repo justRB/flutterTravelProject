@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_project/ui/screens/welcome.dart';
+
 import 'ui/screens/city.dart';
 import 'ui/screens/profile.dart';
 
 Future<void> main() async {
+  await Firebase.initializeApp();
   await initialization(null);
 
   runApp(const MyApp());
