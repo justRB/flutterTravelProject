@@ -54,7 +54,8 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onPressed: () {
-            Navigator.pushNamed(context, '/profile');
+            //Navigator.pushNamed(context, '/profile');
+            Navigator.pushNamed(context, '/connection');
           },
           icon: const Icon(Icons.person),
         ),

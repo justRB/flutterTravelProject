@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_project/ui/screens/connection.dart';
+import 'package:flutter_travel_project/ui/screens/inscription.dart';
 import 'package:flutter_travel_project/ui/screens/welcome.dart';
 import 'ui/screens/city.dart';
 import 'ui/screens/profile.dart';
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => const Welcome(),
         '/city': (context) => const City(),
         '/profile': (context) => const Profile(),
+        '/connection': (context) => const Connection(),
+        '/inscription': (context) => const Inscription(),
       },
       theme: ThemeData(
         useMaterial3: true,

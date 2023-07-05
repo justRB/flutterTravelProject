@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_project/models/publication_class.dart';
 import 'package:flutter_travel_project/ui/widgets/publication_card.dart';
 import '../../models/city_class.dart';
 import '../widgets/header.dart';
@@ -30,6 +31,7 @@ class _CityState extends State<City> {
     CityClass cityObject =
         ModalRoute.of(context)!.settings.arguments as CityClass;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const Header(
         title: "Explorer les avis",
         showProfile: true,
@@ -71,13 +73,14 @@ class _CityState extends State<City> {
                         child: Container(
                           margin: const EdgeInsets.only(left: 25, right: 25),
                           child: const PublicationCard(
-                            authorFirstname: 'Fabien',
-                            authorLastName: 'Dubois',
-                            imageUrl: 'paris.jpg',
-                            comment:
-                                'La Tour Eiffel de jour sur Paris est magnifique, il fait chaud avec un super soleil, en famille nous continuons notre séjour là-bas. La Tour Eiffel de jour sur Paris est magnifique, il fait chaud avec un super soleil, en famille nous continuons notre séjour là-bas.',
-                            date: '04/07/2023 - 13:59',
-                            score: 4.3,
+                            publicationObject: PublicationClass(
+                              author: 'Fabien',
+                              imageUrl: 'paris.jpg',
+                              comment:
+                                  'La Tour Eiffel de jour sur Paris est magnifique, il fait chaud avec un super soleil, en famille nous continuons notre séjour là-bas. La Tour Eiffel de jour sur Paris est magnifique, il fait chaud avec un super soleil, en famille nous continuons notre séjour là-bas.',
+                              date: '04/07/2023 - 13:59',
+                              score: 4.3,
+                            ),
                           ),
                         ),
                       );

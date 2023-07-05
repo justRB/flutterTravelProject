@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_project/models/publication_class.dart';
 
 class PublicationCard extends StatefulWidget {
-  final String authorFirstname;
-  final String authorLastName;
-  final String imageUrl;
-  final String comment;
-  final String date;
-  final double score;
+  final PublicationClass publicationObject;
 
   const PublicationCard({
-    required this.authorFirstname,
-    required this.authorLastName,
-    required this.imageUrl,
-    required this.comment,
-    required this.date,
-    required this.score,
+    required this.publicationObject,
     super.key,
   });
 
@@ -43,7 +34,8 @@ class _PublicationCardState extends State<PublicationCard> {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16)),
-                  child: Image.asset('assets/${widget.imageUrl}'),
+                  child: Image.asset(
+                      'assets/${widget.publicationObject.imageUrl}'),
                 ),
                 Positioned(
                   top: 0,
@@ -62,7 +54,7 @@ class _PublicationCardState extends State<PublicationCard> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            widget.score.toString(),
+                            widget.publicationObject.score.toString(),
                             style: const TextStyle(
                               color: Colors.black,
                               fontSize: 11,
@@ -86,7 +78,7 @@ class _PublicationCardState extends State<PublicationCard> {
               child: Column(
                 children: [
                   Text(
-                    widget.comment,
+                    widget.publicationObject.comment,
                     maxLines: maxLine,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -102,7 +94,7 @@ class _PublicationCardState extends State<PublicationCard> {
                           Image.asset('assets/avatar.png', width: 25),
                           const SizedBox(width: 5),
                           Text(
-                            "${widget.authorFirstname} ${widget.authorLastName}",
+                            widget.publicationObject.author,
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 12,
@@ -114,7 +106,7 @@ class _PublicationCardState extends State<PublicationCard> {
                       Row(
                         children: [
                           Text(
-                            widget.date,
+                            widget.publicationObject.date,
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 10,

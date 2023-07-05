@@ -8,6 +8,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const Header(
         title: "Profil utilisateur",
         showProfile: false,
