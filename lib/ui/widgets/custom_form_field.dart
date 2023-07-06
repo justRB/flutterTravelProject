@@ -32,6 +32,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
     return SizedBox(
       width: MediaQuery.of(context).size.width * widget.percent,
       child: TextFormField(
+        focusNode: FocusNode(canRequestFocus: false),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(
               vertical: widget.symetricVertical,

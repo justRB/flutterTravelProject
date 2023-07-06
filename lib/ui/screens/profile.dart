@@ -25,7 +25,7 @@ class Profile extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return InfoPopup(
+                      return const InfoPopup(
                         nom: 'Nom',
                         prenom: 'Prenom',
                       );
@@ -45,7 +45,8 @@ class InfoPopup extends StatelessWidget {
   final String nom;
   final String prenom;
 
-  InfoPopup({
+  const InfoPopup({
+    super.key,
     required this.nom,
     required this.prenom,
   });

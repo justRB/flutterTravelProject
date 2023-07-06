@@ -33,6 +33,7 @@ class _ResearchBarState extends State<ResearchBar> {
       ),
       width: MediaQuery.of(context).size.width * widget.percent,
       child: TextField(
+        focusNode: FocusNode(canRequestFocus: false),
         onChanged: (value) {
           widget.filter.call(value);
         },

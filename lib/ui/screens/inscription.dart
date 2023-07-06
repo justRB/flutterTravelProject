@@ -36,9 +36,9 @@ class _InscriptionState extends State<Inscription> {
 
   void onPressed() {
     if (_formKey.currentState!.validate()) {
-      print("Nom d'utilisateur : $username");
-      print('Adresse mail: $email');
-      print('Mot de passe: $password');
+      //print("Nom d'utilisateur : $username");
+      //print('Adresse mail: $email');
+      //print('Mot de passe: $password');
     }
   }
 

@@ -137,9 +137,9 @@ class _CityState extends State<City> {
                       ),
                       width: MediaQuery.of(context).size.width / 2.5,
                       height: 50,
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text('Publier un avis'),
                           Icon(Icons.add),
                         ],

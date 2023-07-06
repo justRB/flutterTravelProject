@@ -29,8 +29,8 @@ class _ConnectionState extends State<Connection> {
 
   void onPressed() {
     if (_formKey.currentState!.validate()) {
-      print('Adresse mail: $email');
-      print('Mot de passe: $password');
+      //print('Adresse mail: $email');
+      //print('Mot de passe: $password');
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_travel_project/blocs/cities_cubit.dart';
@@ -11,16 +12,18 @@ import 'ui/screens/city.dart';
 import 'ui/screens/profile.dart';
 
 Future<void> main() async {
-  await initialization(null);
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  //await initialization(null);
 
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (_) => CitiesCubit(CityRepository())),
   ], child: const MyApp()));
 }
 
-Future initialization(BuildContext? context) async {
-  await Future.delayed(const Duration(seconds: 3));
-}
+// Future initialization(BuildContext? context) async {
+//   await Future.delayed(const Duration(seconds: 3));
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
