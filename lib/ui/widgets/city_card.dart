@@ -20,19 +20,24 @@ class CityCard extends StatelessWidget {
     return GestureDetector(
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.only(left: 25, right: 25),
         height: 100,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              city,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.5,
+              child: Text(
+                city,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             Row(

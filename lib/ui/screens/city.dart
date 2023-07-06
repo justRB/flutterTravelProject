@@ -47,7 +47,7 @@ class _CityState extends State<City> {
                   cityObject.name,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 24,
+                    fontSize: 22,
                   ),
                 ),
                 Row(
