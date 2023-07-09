@@ -6,6 +6,4 @@ class CityClass {
     required this.name,
     required this.score,
   });
-
-  toLowerCase() {}
 }

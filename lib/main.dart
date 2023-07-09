@@ -1,8 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_travel_project/blocs/cities_cubit.dart';
+import 'package:flutter_travel_project/blocs/publications_cubit.dart';
+import 'package:flutter_travel_project/blocs/users_cubit.dart';
 import 'package:flutter_travel_project/repositories/city_repository.dart';
+import 'package:flutter_travel_project/repositories/publication_repository.dart';
+import 'package:flutter_travel_project/repositories/user_repository.dart';
 import 'package:flutter_travel_project/ui/screens/connection.dart';
 import 'package:flutter_travel_project/ui/screens/inscription.dart';
 import 'package:flutter_travel_project/ui/screens/welcome.dart';
@@ -14,16 +20,26 @@ import 'ui/screens/profile.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //await initialization(null);
+  UsersCubit usersCubit = UsersCubit(
+    UserRepository(),
+    FirebaseAuth.instance,
+    FirebaseFirestore.instance,
+  );
+
+  await usersCubit.isLoged(FirebaseAuth.instance, FirebaseFirestore.instance);
 
   runApp(MultiBlocProvider(providers: [
-    BlocProvider(create: (_) => CitiesCubit(CityRepository())),
+    BlocProvider(
+        create: (_) =>
+            CitiesCubit(CityRepository(), FirebaseFirestore.instance)),
+    BlocProvider(
+      create: (_) => usersCubit,
+    ),
+    BlocProvider(
+        create: (_) => PublicationsCubit(
+            PublicationRepository(), FirebaseFirestore.instance)),
   ], child: const MyApp()));
 }
-
-// Future initialization(BuildContext? context) async {
-//   await Future.delayed(const Duration(seconds: 3));
-// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -44,7 +60,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromARGB(255, 0, 100, 148),
       ),
       debugShowCheckedModeBanner: false,
-      home: const Welcome(),
+      home: BlocBuilder<UsersCubit, bool>(
+        builder: (context, isLoged) =>
+            isLoged ? const Welcome() : const Connection(),
+      ),
     );
   }
 }

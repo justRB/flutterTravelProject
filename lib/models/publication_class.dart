@@ -1,13 +1,23 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PublicationClass {
+  final String uid;
+  final String city;
   final String author;
-  final String imageUrl;
+  final File? imageUrl;
+  final String? imageHttp;
   final String comment;
-  final String date;
+  final Timestamp date;
   final double score;
 
-  const PublicationClass({
+  PublicationClass({
+    required this.uid,
+    required this.city,
     required this.author,
-    required this.imageUrl,
+    this.imageUrl,
+    this.imageHttp,
     required this.comment,
     required this.date,
     required this.score,

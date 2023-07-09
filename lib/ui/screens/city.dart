@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_travel_project/blocs/cities_cubit.dart';
+import 'package:flutter_travel_project/blocs/publications_cubit.dart';
+import 'package:flutter_travel_project/blocs/publications_state.dart';
+import 'package:flutter_travel_project/models/data_class.dart';
 import 'package:flutter_travel_project/models/publication_class.dart';
 import 'package:flutter_travel_project/ui/widgets/publication_card.dart';
 
@@ -13,6 +18,9 @@ class City extends StatefulWidget {
 }
 
 class _CityState extends State<City> {
+  List<PublicationClass> displayPublications = [];
+  double cityScore = 0.0;
+
   final List<String> filterList = <String>[
     'Plus réçents',
     'Plus anciens',
@@ -27,10 +35,100 @@ class _CityState extends State<City> {
     itemSelected = filterList[0];
   }
 
+  Widget publicationsBlocBuilder(String cityName) {
+    return BlocBuilder<PublicationsCubit, PublicationsState>(
+      builder: (context, state) {
+        switch (state.dataState) {
+          case DataState.loading:
+            return Container(
+              margin: const EdgeInsets.only(top: 75),
+              child: const CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            );
+          case DataState.loaded:
+            if (displayPublications.isEmpty) {
+              displayPublications = state.publications;
+
+              if (displayPublications.isEmpty) {
+                return Container(
+                  margin: const EdgeInsets.only(top: 50),
+                  child: const Text(
+                    'Aucunes publications disponibles',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.white,
+                    ),
+                  ),
+                );
+              }
+            }
+            return publicationsBuild();
+          case DataState.error:
+            return GestureDetector(
+              child: Container(
+                margin: const EdgeInsets.only(top: 75),
+                child: const Text(
+                  'Erreur, rechargez la page',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.red,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.red,
+                  ),
+                ),
+              ),
+              onTap: () {
+                context.read<PublicationsCubit>().loadPublications(cityName);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  Widget publicationsBuild() {
+    return Expanded(
+      child: PageView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: displayPublications.length,
+        itemBuilder: (context, index) {
+          final PublicationClass publication = displayPublications[index];
+          return SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.only(left: 25, right: 25),
+              child: PublicationCard(
+                publicationObject: PublicationClass(
+                  uid: publication.uid,
+                  city: publication.city,
+                  author: publication.author,
+                  imageUrl: publication.imageUrl,
+                  imageHttp: publication.imageHttp,
+                  comment: publication.comment,
+                  date: publication.date,
+                  score: publication.score,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     CityClass cityObject =
         ModalRoute.of(context)!.settings.arguments as CityClass;
+    context.read<PublicationsCubit>().loadPublications(cityObject.name);
+    final citiesCubit = context.read<CitiesCubit>().getCitie(cityObject.name);
+    citiesCubit.then(
+      (CityClass value) {
+        cityScore = value.score;
+      },
+    );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: const Header(
@@ -54,7 +152,7 @@ class _CityState extends State<City> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      cityObject.score.toString(),
+                      cityScore.toString(),
                       style: const TextStyle(
                         color: Colors.white,
                       ),
@@ -65,29 +163,7 @@ class _CityState extends State<City> {
                     ),
                   ],
                 ),
-                Expanded(
-                  child: PageView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return SingleChildScrollView(
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 25, right: 25),
-                          child: const PublicationCard(
-                            publicationObject: PublicationClass(
-                              author: 'Fabien',
-                              imageUrl: 'paris.jpg',
-                              comment:
-                                  'La Tour Eiffel de jour sur Paris est magnifique, il fait chaud avec un super soleil, en famille nous continuons notre séjour là-bas. La Tour Eiffel de jour sur Paris est magnifique, il fait chaud avec un super soleil, en famille nous continuons notre séjour là-bas.',
-                              date: '04/07/2023 - 13:59',
-                              score: 4.3,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                publicationsBlocBuilder(cityObject.name),
               ],
             ),
           ),
@@ -146,7 +222,8 @@ class _CityState extends State<City> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, '/publication');
+                      Navigator.pushNamed(context, '/publication',
+                          arguments: cityObject);
                     },
                   ),
                 ],

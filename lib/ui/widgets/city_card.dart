@@ -40,15 +40,7 @@ class CityCard extends StatelessWidget {
                 ),
               ),
             ),
-            Row(
-              children: [
-                Text(score.toString()),
-                const Icon(
-                  Icons.star,
-                  color: Color.fromARGB(255, 255, 209, 59),
-                ),
-              ],
-            ),
+            const Icon(Icons.arrow_right),
           ],
         ),
       ),

@@ -17,6 +17,12 @@ class _PublicationCardState extends State<PublicationCard> {
   int maxLine = 3;
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = widget.publicationObject.date.toDate();
+    String formattedDateTime = '${dateTime.day.toString().padLeft(2, '0')}/'
+        '${dateTime.month.toString().padLeft(2, '0')}/'
+        '${dateTime.year} '
+        '${dateTime.hour.toString().padLeft(2, '0')}:'
+        '${dateTime.minute.toString().padLeft(2, '0')}';
     return GestureDetector(
       child: Container(
         margin: const EdgeInsets.only(top: 35),
@@ -34,8 +40,14 @@ class _PublicationCardState extends State<PublicationCard> {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16)),
-                  child: Image.asset(
-                      'assets/${widget.publicationObject.imageUrl}'),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    child: FittedBox(
+                      fit: BoxFit.cover,
+                      child: Image.network(widget.publicationObject.imageHttp!),
+                    ),
+                  ),
                 ),
                 Positioned(
                   top: 0,
@@ -106,7 +118,7 @@ class _PublicationCardState extends State<PublicationCard> {
                       Row(
                         children: [
                           Text(
-                            widget.publicationObject.date,
+                            formattedDateTime,
                             style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 10,

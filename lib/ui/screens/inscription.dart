@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_travel_project/blocs/users_cubit.dart';
 import 'package:flutter_travel_project/ui/widgets/custom_form_button.dart';
 import 'package:flutter_travel_project/ui/widgets/header.dart';
 import '../widgets/custom_form_field.dart';
@@ -16,34 +18,42 @@ class _InscriptionState extends State<Inscription> {
   String email = '';
   String password = '';
 
-  void usernameValue(String value) {
-    setState(() {
-      username = value;
-    });
-  }
-
-  void emailValue(String value) {
-    setState(() {
-      email = value;
-    });
-  }
-
-  void passwordValue(String value) {
-    setState(() {
-      password = value;
-    });
-  }
-
-  void onPressed() {
-    if (_formKey.currentState!.validate()) {
-      //print("Nom d'utilisateur : $username");
-      //print('Adresse mail: $email');
-      //print('Mot de passe: $password');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    void usernameValue(String value) {
+      setState(() {
+        username = value;
+      });
+    }
+
+    void emailValue(String value) {
+      setState(() {
+        email = value;
+      });
+    }
+
+    void passwordValue(String value) {
+      setState(() {
+        password = value;
+      });
+    }
+
+    void onPressed() async {
+      if (_formKey.currentState!.validate()) {
+        await context
+            .read<UsersCubit>()
+            .register(username, email, password)
+            .then(
+              (inscription) => {
+                inscription
+                    ? Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/connection', (Route<dynamic> route) => false)
+                    : null
+              },
+            );
+      }
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: const Header(
@@ -67,6 +77,8 @@ class _InscriptionState extends State<Inscription> {
                 borderRadius: 16,
                 wrongValueMessage:
                     "Veuillez entrer un nom d'utilisateur valide",
+                maxLetters: 13,
+                hiddentext: false,
               ),
               const SizedBox(height: 15),
               CustomFormField(
@@ -78,6 +90,8 @@ class _InscriptionState extends State<Inscription> {
                 textSize: 14,
                 borderRadius: 16,
                 wrongValueMessage: 'Veuillez entrer une addresse mail valide',
+                maxLetters: 32,
+                hiddentext: false,
               ),
               const SizedBox(height: 15),
               CustomFormField(
@@ -89,6 +103,8 @@ class _InscriptionState extends State<Inscription> {
                 textSize: 14,
                 borderRadius: 16,
                 wrongValueMessage: 'Veuillez entrer un mot de passe valide',
+                maxLetters: 32,
+                hiddentext: true,
               ),
               const SizedBox(height: 15),
               CustomFormButton(

@@ -1,116 +1,83 @@
 import 'package:flutter/material.dart';
-
-import '../widgets/header.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_travel_project/blocs/users_cubit.dart';
+import 'package:flutter_travel_project/ui/widgets/custom_form_button.dart';
+import 'package:flutter_travel_project/ui/widgets/header.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    void deconnection() async {
+      await context.read<UsersCubit>().deconnection().then(
+            (deconnection) => {
+              deconnection
+                  ? Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/connection', (Route<dynamic> route) => false)
+                  : null
+            },
+          );
+    }
+
+    final usersCubit = BlocProvider.of<UsersCubit>(context);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: const Header(
-        title: "Profil utilisateur",
+        title: 'Profil utilisateur',
         showProfile: false,
         showReturn: true,
       ),
       body: Center(
         child: Column(
           children: [
-            FloatingActionButton.extended(
-                label: const Text("Informations"),
-                backgroundColor: const Color.fromARGB(255, 90, 170, 149),
-                icon: const Icon(Icons.info),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const InfoPopup(
-                        nom: 'Nom',
-                        prenom: 'Prenom',
-                      );
-                    },
-                  );
-                }),
-            const SwitchThemeMode(),
-            const Text("Vos lieux visités")
+            Container(
+              padding: const EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width * 0.8,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nom d'utilisateur :",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Addresse mail :',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(usersCubit.userClient.username),
+                      Text(usersCubit.userClient.email),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 25),
+            CustomFormButton(
+              onPressed: deconnection,
+              textButton: 'déconnexion',
+              textSize: 14,
+              borderRadius: 8,
+              paddingRadius: 10,
+            ),
           ],
         ),
       ),
     );
   }
-}
-
-class InfoPopup extends StatelessWidget {
-  final String nom;
-  final String prenom;
-
-  const InfoPopup({
-    super.key,
-    required this.nom,
-    required this.prenom,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Informations de la personne'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text('Nom: $nom'),
-          Text('Prénom: $prenom'),
-        ],
-      ),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('Fermer'),
-        ),
-      ],
-    );
-  }
-}
-
-class SwitchThemeMode extends StatefulWidget {
-  const SwitchThemeMode({super.key});
-
-  @override
-  State<SwitchThemeMode> createState() => _SwitchThemeModeState();
-}
-
-class _SwitchThemeModeState extends State<SwitchThemeMode> {
-  bool light = true;
-
-  final MaterialStateProperty<Icon?> thumbIcon =
-      MaterialStateProperty.resolveWith<Icon?>(
-    (Set<MaterialState> states) {
-      if (states.contains(MaterialState.selected)) {
-        return const Icon(Icons.light_mode);
-      }
-      return const Icon(Icons.dark_mode);
-    },
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Switch(
-      thumbIcon: thumbIcon,
-      value: light,
-      onChanged: (bool value) {
-        setState(() {
-          light = value;
-        });
-      },
-    );
-  }
-}
-
-@override
-Widget build(BuildContext context) {
-  // TODO: implement build
-  throw UnimplementedError();
 }

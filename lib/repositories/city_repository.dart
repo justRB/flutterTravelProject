@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import '../models/city_class.dart';
 
@@ -34,6 +37,32 @@ class CityRepository {
       return cities;
     } else {
       throw Exception();
+    }
+  }
+
+  Future<CityClass> getCitie(
+      FirebaseFirestore firebaseFirestore, String cityName) async {
+    try {
+      CollectionReference publicationsCollections =
+          firebaseFirestore.collection('publications');
+
+      QuerySnapshot snapshot = await publicationsCollections
+          .where('publication_city', isEqualTo: cityName)
+          .get();
+
+      double totalScore = 0.0;
+
+      for (var element in snapshot.docs) {
+        totalScore += element.get('publication_score');
+      }
+
+      double score = totalScore / snapshot.docs.length;
+      String scoreString = score.toStringAsFixed(1);
+      print(score);
+      return CityClass(name: cityName, score: double.parse(scoreString));
+    } catch (e) {
+      log(e.toString());
+      return CityClass(name: cityName, score: 0.0);
     }
   }
 }

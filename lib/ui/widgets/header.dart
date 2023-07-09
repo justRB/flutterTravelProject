@@ -38,7 +38,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  Widget showTheProfile(context) {
+  Widget showTheProfile(BuildContext context) {
     if (showProfile) {
       return Container(
         margin: const EdgeInsets.only(left: 5, right: 5),
@@ -54,8 +54,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onPressed: () {
-            //Navigator.pushNamed(context, '/profile');
-            Navigator.pushNamed(context, '/connection');
+            Navigator.pushNamed(context, '/profile');
           },
           icon: const Icon(Icons.person),
         ),
